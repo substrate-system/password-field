@@ -1,6 +1,17 @@
 password-field {
     display: flex;
-    margin: 0;
+    margin: 1.4rem 0;
+
+    & text-input {
+        width: 100%;
+        & .input {
+            margin: 0;
+        }
+
+        & input {
+            width: 100%;
+        }
+    }
 
     & button {
         border: none;

@@ -1,3 +1,13 @@
 button {
     cursor: pointer;
 }
+
+password-field {
+    width: 25rem;
+
+    & text-input {
+        & input:not(:placeholder-shown) ~ label {
+            top: -16px;
+        }
+    }
+}
