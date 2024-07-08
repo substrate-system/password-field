@@ -12,5 +12,6 @@ test('example', async t => {
 
     t.ok(el, 'should find the element')
     t.ok(el?.querySelector('input'), 'should contain an input element')
-    t.ok(el?.querySelector('eye-regular'), 'should have the visibility change icon')
+    t.ok(el?.querySelector('eye-regular'),
+        'should have the visibility change icon, set to hidden by default')
 })

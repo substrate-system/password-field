@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "lint": "eslint \"./**/*.{ts,js}\"",
-    "build-tests": "esbuild test/index.ts --target=es2020 --bundle --keep-names > test/test-bundle.js",
+    "build-tests": "esbuild test/index.ts --target=es2020 --outdir=test --bundle --keep-names",
     "test": "npm run lint && npm run build && npm run build-tests && npm run test-tape-run",
     "test-tape-run": "cat test/index.html | tape-run --input=html --static=test | tap-spec",
     "build-css": "postcss src/index.css --use postcss-nesting > dist/style.css",
