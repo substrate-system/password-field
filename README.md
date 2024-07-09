@@ -105,10 +105,6 @@ import '@namespace/package-name/css/min'
 Use event bubbling to attach a single listener to the parent form. Use the imported component, `PasswordField`, to get the namespaced event name.
 
 ```js
-form?.addEventListener(PasswordField.event('change-visibility'), ev => {
-```
-
-```js
 import { PasswordField } from '@substrate-system/password-field'
 import '@substrate-field/password-field/css'
 
