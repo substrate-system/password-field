@@ -10,7 +10,14 @@ document.body.innerHTML += `
             autocomplete="username email"
             style="display: none;"
         />
-        <password-field display-name="New Password"></password-field>
-        <password-field display-name="Confirm New Password"></password-field>
+
+        <password-field
+            name="password"
+            display-name="New Password"
+        ></password-field>
+        <password-field
+            name="confirm-password"
+            display-name="Confirm New Password"
+        ></password-field>
     </form>
 `
