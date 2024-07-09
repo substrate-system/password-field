@@ -6,3 +6,77 @@
 [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 
 Web component for password inputs
+
+__*Featuring*__
+
+An eyeball button that will change the visiblity of the password.
+
+This state is tracked by the webcomponent itself, but it can also be set by an attribute, `visible`. If `visible` is present on the tag, then you can see the password.
+
+See [./example](./example/index.ts) for an example of using the attribute to control visiblity, and keep two inputs in sync with each other.
+
+## Install
+
+```sh
+npm i -S @substrate-system/password-field
+```
+
+## tl;dr
+
+Import the JS component and CSS.
+
+```js
+import { PasswordField } from '@substrate-system/password-field'
+import '@substrate-system/password-field/css'
+// or import minified css
+import '@substrate-system/password-field/css/min'
+```
+
+## API
+
+### Events
+
+* `password-field:change-visiblity`
+
+    ```js
+    import { PasswordField } from '../src/index.js'
+    PasswordField.event('change-visiblity')
+    // => 'password-field:change-visiblity'
+    ```
+
+    Fired when someone clicks the eyeball button in the field.
+
+### Attributes
+
+* `visible`
+* `display-name`
+* `required`
+* `autocomplete`
+* `name`
+
+## Example
+Use event bubbling and attach a single listener to the parent form. Use the imported component, `PasswordField`, to get the namespaced event name.
+
+```js
+form?.addEventListener(PasswordField.event('change-visibility'), ev => {
+```
+
+```js
+import { PasswordField } from '@substrate-system/password-field'
+import '@substrate-field/password-field/css'
+
+const form = document.querySelector('form')
+
+form?.addEventListener(PasswordField.event('change-visibility'), ev => {
+    // synchronize changes in visibility, so
+    // both inputs are either visible or not visible
+    const { isVisible } = ev.detail
+    document.querySelectorAll('password-field').forEach(el => {
+        if (isVisible) {
+            el.setAttribute('visible', '')
+        } else {
+            el.removeAttribute('visible')
+        }
+    })
+})
+```

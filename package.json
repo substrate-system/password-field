@@ -12,8 +12,8 @@
     "build-tests": "esbuild test/index.ts --target=es2020 --outdir=test --bundle --keep-names",
     "test": "npm run lint && npm run build && npm run build-tests && npm run test-tape-run",
     "test-tape-run": "cat test/index.html | tape-run --input=html --static=test | tap-spec",
-    "build-css": "postcss src/index.css --use postcss-nesting > dist/style.css",
-    "build-css:min": "postcss src/index.css --use cssnano postcss-nesting > dist/style.min.css",
+    "build-css": "postcss src/style.css --use postcss-nesting > dist/style.css",
+    "build-css:min": "postcss src/style.css --use cssnano postcss-nesting > dist/style.min.css",
     "build-cjs": "esbuild src/*.ts --format=cjs --keep-names --tsconfig=tsconfig.build.json --outdir=./dist --out-extension:.js=.cjs --sourcemap",
     "build-esm": "esbuild src/*.ts --format=esm --metafile=dist/meta.json --keep-names --tsconfig=tsconfig.build.json --outdir=./dist --sourcemap && tsc --emitDeclarationOnly --project tsconfig.build.json --outDir dist",
     "build-esm:min": "esbuild ./src/index.ts --format=esm --keep-names --bundle --tsconfig=tsconfig.build.json --minify --outfile=./dist/index.min.js",
@@ -25,6 +25,28 @@
     "version": "auto-changelog -p --template keepachangelog --breaking-pattern 'BREAKING CHANGE:' && git add CHANGELOG.md",
     "postversion": "git push --follow-tags && npm publish",
     "prepublishOnly": "npm run build"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./css": [
+      "./dist/style.css"
+    ],
+    "./css/min": [
+      "./dist/style.min.css"
+    ],
+    "./*": {
+      "import": [
+        "./dist/*.js",
+        "./dist/*"
+      ],
+      "require": [
+        "./dist/*.cjs",
+        "./dist/*"
+      ]
+    }
   },
   "dependencies": {
     "@substrate-system/icons": "^0.0.2",
@@ -53,22 +75,6 @@
     "typedoc": "^0.26.2",
     "typescript": "^5.4.5",
     "vite": "^5.2.11"
-  },
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
-    },
-    "./*": {
-      "import": [
-        "./dist/*.js",
-        "./dist/*"
-      ],
-      "require": [
-        "./dist/*.cjs",
-        "./dist/*"
-      ]
-    }
   },
   "author": "nichoth <nichoth@nichoth.com> (https://nichoth.com)",
   "license": "MIT"

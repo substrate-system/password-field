@@ -1,6 +1,8 @@
 import '../src/index.css'
-import '../src/index.js'
+import { PasswordField } from '../src/index.js'
+import Debug from '@bicycle-codes/debug'
 import './index.css'
+const debug = Debug()
 
 document.body.innerHTML += `
     <form>
@@ -21,3 +23,19 @@ document.body.innerHTML += `
         ></password-field>
     </form>
 `
+
+const form = document.querySelector('form')
+
+// synchronize changes in visibility, so
+// both inputs are either visible or not visible
+form?.addEventListener(PasswordField.event('change-visibility'), ev => {
+    const { isVisible } = ev.detail
+    debug('**is visible**', isVisible)
+    document.querySelectorAll('password-field').forEach(el => {
+        if (isVisible) {
+            el.setAttribute('visible', '')
+        } else {
+            el.removeAttribute('visible')
+        }
+    })
+})

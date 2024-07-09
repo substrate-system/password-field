@@ -3,74 +3,28 @@ import '@substrate-system/icons/eye-slash'
 import '@substrate-system/icons/eye-regular'
 import '@substrate-system/text-input'
 import '@substrate-system/text-input/css'
-import './index.css'
-import { createDebug } from '@bicycle-codes/debug'
-const debug = createDebug()
+import './style.css'
 
+/**
+ * __attributes__
+ *   - `visible` -- true if present
+ */
 export class PasswordField extends WebComponent.create('password-field') {
-    isVisible = false
-
-    constructor () {
-        super()
-
-        const autocomplete = this.getAttribute('autocomplete') || 'new-password'
-
-        this.innerHTML = `
-            <text-input
-                display-name="${this.getAttribute('display-name') || 'Password'}"
-                title="Password"
-                required
-                autocomplete="${autocomplete}"
-                name="${this.getAttribute('name') || 'password'}"
-                type="${this.getType()}"
-            ></text-input>
-
-            <button class="pw-visibility">
-                ${this.getButtonContent()}
-            </button>
-        `
-    }
-
-    /**
-     * Add click event listeners
-     */
-    connectedCallback () {
-        const btn = this.querySelector('.pw-visibility')
-        btn?.addEventListener('click', ev => {
-            this.isVisible = !this.isVisible
-            ev.preventDefault()
-            btn.innerHTML = this.getButtonContent()
-            this.setAttribute('type', this.getType())
-            this.querySelector('input')?.setAttribute('type', this.getType())
-        })
-    }
-
-    getType ():'text'|'password' {
-        return this.isVisible ? 'text' : 'password'
-    }
-
-    getButtonContent () {
-        return this.isVisible ?
-            '<eye-slash></eye-slash>' :
-            '<eye-regular></eye-regular>'
-    }
-}
-
-export class _PasswordField extends HTMLElement {
-    isVisible = false
-    // need this for `attributeChangedCallback`
+    isVisible:boolean = this.hasAttribute('visible')
     static observedAttributes = ['visible']
 
     constructor () {
         super()
 
         const autocomplete = this.getAttribute('autocomplete') || 'new-password'
+        // eslint-disable-next-line
+        this.isVisible = this.hasAttribute('visible')
 
         this.innerHTML = `
             <text-input
                 display-name="${this.getAttribute('display-name') || 'Password'}"
                 title="Password"
-                required
+                ${this.getAttribute('required') === null ? '' : 'required'}
                 autocomplete="${autocomplete}"
                 name="${this.getAttribute('name') || 'password'}"
                 type="${this.getType()}"
@@ -90,11 +44,17 @@ export class _PasswordField extends HTMLElement {
      */
     attributeChangedCallback (name:string, oldValue:string, newValue:string) {
         this[`handleChange_${name}`](oldValue, newValue)
-        debug('an attribute changed', name)
     }
 
+    // empty string = is visible
+    // null = not visible
     handleChange_visible (_, newValue) {
-        debug('changeeeeee', newValue)
+        if (newValue === null) {
+            this.isVisible = false
+        } else {
+            this.isVisible = true
+        }
+        this.reRender()
     }
 
     /**
@@ -105,10 +65,18 @@ export class _PasswordField extends HTMLElement {
         btn?.addEventListener('click', ev => {
             this.isVisible = !this.isVisible
             ev.preventDefault()
-            btn.innerHTML = this.getButtonContent()
-            this.setAttribute('type', this.getType())
-            this.querySelector('input')?.setAttribute('type', this.getType())
+            this.reRender()
+            this.emit('change-visibility', {
+                detail: { isVisible: this.isVisible }
+            })
         })
+    }
+
+    reRender () {
+        const btn = this.querySelector('.pw-visibility')
+        btn!.innerHTML = this.getButtonContent()
+        this.setAttribute('type', this.getType())
+        this.querySelector('input')?.setAttribute('type', this.getType())
     }
 
     getType ():'text'|'password' {
