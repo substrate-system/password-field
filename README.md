@@ -22,7 +22,6 @@ npm i -S @substrate-system/password-field
 ```
 
 ## tl;dr
-
 Import the JS component and CSS.
 
 ```js
@@ -77,8 +76,33 @@ form?.addEventListener(eventName, ev => {
 * `autocomplete`
 * `name`
 
+### ESM & CJS
+
+This exposes ESM and common JS via [package.json `exports` field](https://nodejs.org/api/packages.html#exports).
+
+### ESM
+```js
+import '@namespace/package/module'
+```
+
+### Common JS
+```js
+require('@namespace/package/module')
+```
+
+## CSS
+
+```js
+import '@namespace/package-name/css'
+```
+
+Or minified:
+```js
+import '@namespace/package-name/css/min'
+```
+
 ## Example
-Use event bubbling and attach a single listener to the parent form. Use the imported component, `PasswordField`, to get the namespaced event name.
+Use event bubbling to attach a single listener to the parent form. Use the imported component, `PasswordField`, to get the namespaced event name.
 
 ```js
 form?.addEventListener(PasswordField.event('change-visibility'), ev => {
