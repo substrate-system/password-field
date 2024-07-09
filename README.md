@@ -32,6 +32,29 @@ import '@substrate-system/password-field/css'
 import '@substrate-system/password-field/css/min'
 ```
 
+Use the tag in HTML
+
+```html
+<form>
+    <password-field
+        name="password"
+        display-name="New Password"
+    ></password-field>
+</form>
+```
+
+Listen for events in JS
+
+```js
+import { PasswordField } from '@substrate-system/password-field'
+const eventName = PasswordField.event('change-visibility')
+
+form?.addEventListener(eventName, ev => {
+    const { isVisible } = ev.detail
+    console.log('is visible', isVisible)
+})
+```
+
 ## API
 
 ### Events

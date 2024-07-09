@@ -5,6 +5,13 @@ import '@substrate-system/text-input'
 import '@substrate-system/text-input/css'
 import './style.css'
 
+// for docuement.querySelector
+declare global {
+    interface HTMLElementTagNameMap {
+        'password-field': PasswordField;
+    }
+}
+
 /**
  * __attributes__
  *   - `visible` -- true if present
