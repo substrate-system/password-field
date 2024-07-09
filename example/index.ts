@@ -1,4 +1,4 @@
-import '../src/index.css'
+import '../src/style.css'
 import { PasswordField } from '../src/index.js'
 import Debug from '@bicycle-codes/debug'
 import './index.css'
