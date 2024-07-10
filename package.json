@@ -49,7 +49,7 @@
     }
   },
   "dependencies": {
-    "@substrate-system/icons": "^0.0.2",
+    "@substrate-system/icons": "^0.0.3",
     "@substrate-system/text-input": "^0.0.3",
     "@substrate-system/web-component": "^0.0.4"
   },
