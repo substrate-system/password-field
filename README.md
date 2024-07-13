@@ -19,6 +19,19 @@ See [./example](./example/index.ts) for an example of using the attribute to con
 
 <!-- toc -->
 
+- [Install](#install)
+- [tl;dr](#tldr)
+- [API](#api)
+  * [Events](#events)
+  * [Attributes](#attributes)
+  * [ESM & CJS](#esm--cjs)
+  * [ESM](#esm)
+  * [Common JS](#common-js)
+- [CSS](#css)
+- [Example](#example)
+
+<!-- tocstop -->
+
 ## Install
 
 ```sh
