@@ -78,6 +78,10 @@ form?.addEventListener(eventName, ev => {
 * `autocomplete`
 * `name`
 
+> [!NOTE]  
+> The `name` attribute is used for an `id` on the element also, so it should
+> be unique.
+
 ### ESM & CJS
 
 This exposes ESM and common JS via [package.json `exports` field](https://nodejs.org/api/packages.html#exports).
