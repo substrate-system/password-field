@@ -17,6 +17,8 @@ This state is tracked by the webcomponent itself, but it can also be set by an a
 
 See [./example](./example/index.ts) for an example of using the attribute to control visiblity, and keep two inputs in sync with each other.
 
+<!-- toc -->
+
 ## Install
 
 ```sh
