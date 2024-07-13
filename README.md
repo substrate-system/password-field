@@ -68,7 +68,14 @@ form?.addEventListener(eventName, ev => {
     // => 'password-field:change-visiblity'
     ```
 
-    Fired when someone clicks the eyeball button in the field.
+    Fired when someone clicks the eyeball button in the field. The event
+    `.detail` has a property `isVisible`
+
+    ```js
+    form?.addEventListener(PasswordField.event('change-visibility'), ev => {
+        const { isVisible } = ev.detail
+    })
+    ```
 
 ### Attributes
 
