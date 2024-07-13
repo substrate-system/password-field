@@ -7,6 +7,8 @@
 
 Web component for password inputs
 
+[See a live demonstration](https://substrate-system.github.io/password-field/)
+
 __*Featuring*__
 
 An eyeball button that will change the visiblity of the password.
