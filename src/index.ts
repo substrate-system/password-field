@@ -73,6 +73,9 @@ export class PasswordField extends WebComponent.create('password-field') {
             this.isVisible = !this.isVisible
             ev.preventDefault()
             this.reRender()
+            // const data:{ detail: { isVisible:boolean } } = {
+            //     detail: { isVisible: this.isVisible }
+            // }
             this.emit('change-visibility', {
                 detail: { isVisible: this.isVisible }
             })

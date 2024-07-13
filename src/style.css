@@ -16,6 +16,7 @@ password-field {
     & button {
         border: none;
         background-color: transparent;
+        height: 42px;
     }
 
     & input {
@@ -33,6 +34,8 @@ password-field {
     }
 
     & svg {
+        position: relative;
+        top: 2px;
         width: 1.8rem;
     }
 }
