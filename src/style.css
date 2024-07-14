@@ -2,17 +2,6 @@ password-field {
     display: flex;
     margin: 1.4rem 0;
 
-    & text-input {
-        width: 100%;
-        & .input {
-            margin: 0;
-        }
-
-        & input {
-            width: 100%;
-        }
-    }
-
     & button {
         border: none;
         background-color: transparent;
@@ -37,5 +26,17 @@ password-field {
         position: relative;
         top: 2px;
         width: 1.8rem;
+    }
+
+    & text-input {
+        width: 100%;
+
+        & .input {
+            margin: 0;
+        }
+
+        & input {
+            width: 100%;
+        }
     }
 }
