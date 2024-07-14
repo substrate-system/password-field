@@ -15,7 +15,7 @@ An eyeball button that will change the visiblity of the password.
 
 This state is tracked by the webcomponent itself, but it can also be set by an attribute, `visible`. If `visible` is present on the tag, then you can see the password.
 
-See [./example](./example/index.ts) for an example of using the attribute to control visiblity, and keep two inputs in sync with each other.
+See [./example](./example/index.ts) for an example of using the attribute to control visiblity, and keeping two inputs in sync with each other.
 
 <!-- toc -->
 
