@@ -14,6 +14,7 @@ document.body.innerHTML += `
         />
 
         <password-field
+            required
             name="password"
             display-name="New Password"
         ></password-field>

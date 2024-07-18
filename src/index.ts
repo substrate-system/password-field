@@ -15,6 +15,7 @@ declare global {
 /**
  * __attributes__
  *   - `visible` -- true if present
+ *   - any attributes for `text-input`
  */
 export class PasswordField extends WebComponent.create('password-field') {
     isVisible:boolean = this.hasAttribute('visible')
@@ -24,18 +25,25 @@ export class PasswordField extends WebComponent.create('password-field') {
         super()
 
         const autocomplete = this.getAttribute('autocomplete') || 'new-password'
-        // eslint-disable-next-line
         this.isVisible = this.hasAttribute('visible')
 
+        const attrs = Array.from(this.attributes).reduce((acc, attr) => {
+            acc[attr.name] = attr.value || true
+            return acc
+        }, {} as Partial<{ autocomplete, name, type, value }>)
+
+        attrs['display-name'] = this.getAttribute('display-name') || 'Password'
+        attrs.name = this.getAttribute('name') || 'password'
+        attrs.autocomplete = autocomplete
+        attrs.type = this.getType()
+
+        const attrString = Object.keys(attrs).map((k) => {
+            const val = attrs[k]
+            return k + (val === true ? '' : '=' + `"${val}"`)
+        }).join(' ')
+
         this.innerHTML = `
-            <text-input
-                display-name="${this.getAttribute('display-name') || 'Password'}"
-                title="Password"
-                ${this.getAttribute('required') === null ? '' : 'required'}
-                autocomplete="${autocomplete}"
-                name="${this.getAttribute('name') || 'password'}"
-                type="${this.getType()}"
-            ></text-input>
+            <text-input ${attrString}></text-input>
 
             <button class="pw-visibility">
                 ${this.getButtonContent()}
@@ -73,9 +81,6 @@ export class PasswordField extends WebComponent.create('password-field') {
             this.isVisible = !this.isVisible
             ev.preventDefault()
             this.reRender()
-            // const data:{ detail: { isVisible:boolean } } = {
-            //     detail: { isVisible: this.isVisible }
-            // }
             this.emit('change-visibility', {
                 detail: { isVisible: this.isVisible }
             })
