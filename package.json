@@ -50,7 +50,7 @@
     }
   },
   "dependencies": {
-    "@substrate-system/icons": "^0.0.7",
+    "@substrate-system/icons": "^0.0.8",
     "@substrate-system/text-input": "^0.0.10",
     "@substrate-system/util": "^0.1.2",
     "@substrate-system/web-component": "^0.0.4"
@@ -71,7 +71,7 @@
     "markdown-toc": "^1.2.0",
     "postcss": "^8.4.38",
     "postcss-cli": "^11.0.0",
-    "postcss-nesting": "^12.1.5",
+    "postcss-nesting": "^13.0.0",
     "preact": "^10.22.1",
     "stylelint": "^16.7.0",
     "stylelint-config-standard": "^36.0.1",
