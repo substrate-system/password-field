@@ -2,6 +2,8 @@ import { test } from '@bicycle-codes/tapzero'
 import { waitFor, click } from '@bicycle-codes/dom'
 import { PasswordField } from '../src/index.js'
 
+customElements.define('password-field', PasswordField)
+
 test('password field', async t => {
     document.body.innerHTML += `
         <password-field class="test">
