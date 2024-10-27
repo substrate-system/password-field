@@ -19,7 +19,7 @@ password-field {
     & .pw-visibility {
         position: relative;
         right: 45px;
-        top: 2px;
+        top: 25px;
     }
 
     & svg {

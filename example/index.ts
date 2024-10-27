@@ -1,7 +1,7 @@
 import { PasswordField } from '../src/index.js'
 import Debug from '@bicycle-codes/debug'
-import './index.css'
 import '../src/style.css'
+import './index.css'
 const debug = Debug()
 
 customElements.define('password-field', PasswordField)
