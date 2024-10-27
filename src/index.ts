@@ -104,5 +104,3 @@ export class PasswordField extends WebComponent.create('password-field') {
             '<eye-regular></eye-regular>'
     }
 }
-
-customElements.define('password-field', PasswordField)
