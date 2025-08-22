@@ -1,8 +1,8 @@
-import { test } from '@bicycle-codes/tapzero'
-import { waitFor, click } from '@bicycle-codes/dom'
-import { PasswordField } from '../src/index.js'
+import { test } from '@substrate-system/tapzero'
+import { waitFor, click } from '@substrate-system/dom'
+import { define } from '../src/index.js'
 
-customElements.define('password-field', PasswordField)
+define()
 
 test('password field', async t => {
     document.body.innerHTML += `
@@ -23,7 +23,7 @@ test('events', async t => {
     const el = await waitFor('password-field')
     const eye = el?.querySelector('button')
 
-    el?.addEventListener(PasswordField.event('change-visibility'), (ev) => {
+    el?.addEventListener('password-field:change-visibility', (ev) => {
         const { isVisible } = ev.detail
         t.ok(ev, 'should get a "change-visiblity" event')
         t.ok(isVisible,

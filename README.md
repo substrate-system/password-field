@@ -4,7 +4,8 @@
 [![module](https://img.shields.io/badge/module-ESM%2FCJS-blue?style=flat-square)](README.md)
 [![install size](https://packagephobia.com/badge?p=@substrate-system/password-field)](https://packagephobia.com/result?p=@substrate-system/password-field)
 [![semantic versioning](https://img.shields.io/badge/semver-2.0.0-blue?logo=semver&style=flat-square)](https://semver.org/)
-[![license](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
+[![license](https://img.shields.io/badge/license-Big_Time-blue?style=flat-square)](LICENSE)
+
 
 Web component for password inputs
 
@@ -23,6 +24,7 @@ See [./example](./example/index.ts) for an example of using the attribute to con
 - [Install](#install)
 - [tl;dr](#tldr)
 - [API](#api)
+  * [Node.js / Server-Side Rendering](#nodejs--server-side-rendering)
   * [Events](#events)
   * [Attributes](#attributes)
   * [ESM & CJS](#esm--cjs)
@@ -40,6 +42,8 @@ npm i -S @substrate-system/password-field
 ```
 
 ## tl;dr
+
+### Client-side Usage
 Import the JS component and CSS.
 
 ```js
@@ -47,6 +51,18 @@ import { PasswordField } from '@substrate-system/password-field'
 import '@substrate-system/password-field/css'
 // or import minified css
 import '@substrate-system/password-field/css/min'
+```
+
+### Server-side Usage
+For Node.js or server-side rendering:
+
+```js
+import { render } from '@substrate-system/password-field/html'
+
+const html = render({
+    name: 'password',
+    'display-name': 'Password'
+})
 ```
 
 Use the tag in HTML
@@ -73,6 +89,63 @@ form?.addEventListener(eventName, ev => {
 ```
 
 ## API
+
+### Node.js / Server-Side Rendering
+
+For server-side rendering or generating HTML strings in Node.js, you can use the `render` function:
+
+```js
+import { render } from '@substrate-system/password-field/html'
+
+// Basic usage
+const html = render()
+// Returns: <text-input></text-input><button class="pw-visibility"><eye-regular></eye-regular></button>
+
+// With attributes
+const html = render({
+    name: 'password',
+    'display-name': 'New Password',
+    required: true,
+    isVisible: false
+})
+// Returns: <text-input name="password" display-name="New Password" required></text-input><button class="pw-visibility"><eye-regular></eye-regular></button>
+```
+
+**Available attributes:**
+- `name` - Input name attribute
+- `display-name` - Display name for the field
+- `required` - Whether the field is required
+- `autocomplete` - Autocomplete attribute (defaults to 'new-password')
+- `isVisible` - Whether the password is visible (affects button icon)
+- Any other attributes will be passed through to the text-input component
+
+**TypeScript types:**
+```ts
+import type { Attrs } from '@substrate-system/web-component/attributes'
+
+// The render function accepts an optional Attrs object
+function render(attributes?: Attrs): string
+```
+
+**SSR Example:**
+```js
+import { render } from '@substrate-system/password-field/html'
+
+// In your server-side template
+function renderLoginForm() {
+    return `
+        <form>
+            <input type="email" name="email" required />
+            ${render({
+                name: 'password',
+                'display-name': 'Password',
+                required: true
+            })}
+            <button type="submit">Login</button>
+        </form>
+    `
+}
+```
 
 ### Events
 
