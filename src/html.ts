@@ -1,4 +1,7 @@
-import { type Attrs, toAttributes } from '@substrate-system/web-component/attributes'
+import {
+    type Attrs,
+    toAttributes
+} from '@substrate-system/web-component/attributes'
 
 export function render (attributes?:Attrs):string {
     const attrs = attributes ? toAttributes(attributes) : ''
