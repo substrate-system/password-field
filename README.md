@@ -23,6 +23,8 @@ See [./example](./example/index.ts) for an example of using the attribute to con
 
 - [Install](#install)
 - [tl;dr](#tldr)
+  * [Client-side Usage](#client-side-usage)
+  * [Server-side Usage](#server-side-usage)
 - [API](#api)
   * [Node.js / Server-Side Rendering](#nodejs--server-side-rendering)
   * [Events](#events)
