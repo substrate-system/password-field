@@ -1,5 +1,5 @@
 import { PasswordField } from '../src/index.js'
-import Debug from '@bicycle-codes/debug'
+import Debug from '@substrate-system/debug'
 import '../src/style.css'
 import './index.css'
 const debug = Debug()

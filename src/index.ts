@@ -24,6 +24,10 @@ export class PasswordField extends WebComponent.create('password-field') {
     static observedAttributes = ['visible']
     isVisible:boolean
 
+    static event (name:string) {
+        return WebComponent.event(name)
+    }
+
     constructor () {
         super()
         this.isVisible = this.hasAttribute('visible')

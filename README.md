@@ -16,9 +16,12 @@ __*Featuring*__
 
 An eyeball button that will change the visiblity of the password.
 
-This state is tracked by the webcomponent itself, but it can also be set by an attribute, `visible`. If `visible` is present on the tag, then you can see the password.
+This state is tracked by the webcomponent itself, but it can also be set by
+an attribute, `visible`. If `visible` is present on the tag, then you can see
+the password.
 
-See [./example](./example/index.ts) for an example of using the attribute to control visiblity, and keeping two inputs in sync with each other.
+See [./example](./example/index.ts) for an example of using the attribute to
+control visiblity, and keeping two inputs in sync with each other.
 
 <!-- toc -->
 
@@ -47,7 +50,8 @@ npm i -S @substrate-system/password-field
 
 ## tl;dr
 
-### Client-side Usage
+### Client-side
+
 Import the JS component and CSS.
 
 ```js
@@ -57,8 +61,9 @@ import '@substrate-system/password-field/css'
 import '@substrate-system/password-field/css/min'
 ```
 
-### Server-side Usage
-For Node.js or server-side rendering:
+### Server-Side
+
+For Node.js:
 
 ```js
 import { render } from '@substrate-system/password-field/html'
@@ -94,16 +99,16 @@ form?.addEventListener(eventName, ev => {
 
 ## API
 
-### Node.js / Server-Side Rendering
+### Server-Side Rendering
 
-For server-side rendering or generating HTML strings in Node.js, you can use the `render` function:
+For server-side rendering or generating HTML strings in Node.js, you can
+use the `render` function:
 
 ```js
 import { render } from '@substrate-system/password-field/html'
 
 // Basic usage
 const html = render()
-// Returns: <text-input></text-input><button class="pw-visibility"><eye-regular></eye-regular></button>
 
 // With attributes
 const html = render({
@@ -112,10 +117,10 @@ const html = render({
     required: true,
     isVisible: false
 })
-// Returns: <text-input name="password" display-name="New Password" required></text-input><button class="pw-visibility"><eye-regular></eye-regular></button>
 ```
 
-**Available attributes:**
+### Available attributes
+
 - `name` - Input name attribute
 - `display-name` - Display name for the field
 - `required` - Whether the field is required
@@ -124,9 +129,11 @@ const html = render({
 - Any other attributes will be passed through to the text-input component
 
 > [!NOTE]  
-> For server-side rendering, you'll need to include the CSS separately in your HTML template. The `render()` function only generates the HTML structure.
+> For server-side rendering, you'll need to include the CSS separately in your
+> HTML template. The `render()` function only generates the HTML structure.
 
-**TypeScript types:**
+### TypeScript types
+
 ```ts
 import type { Attrs } from '@substrate-system/web-component/attributes'
 
@@ -134,7 +141,8 @@ import type { Attrs } from '@substrate-system/web-component/attributes'
 function render(attributes?: Attrs): string
 ```
 
-**SSR Example:**
+### SSR Example
+
 ```js
 import { render } from '@substrate-system/password-field/html'
 
@@ -154,7 +162,8 @@ function renderLoginForm() {
 }
 ```
 
-**Testing SSR Functions:**
+## Testing SSR Functions
+
 ```bash
 # Test server-side rendering functions
 npm run test:node
@@ -163,7 +172,7 @@ npm run test:node
 npm test
 ```
 
-### Events
+## Events
 
 * `password-field:change-visiblity`
 
@@ -182,7 +191,7 @@ npm test
     })
     ```
 
-### Attributes
+## Attributes
 
 * `visible`
 * `display-name`
