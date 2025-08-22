@@ -3,6 +3,7 @@
 [![types](https://img.shields.io/npm/types/@substrate-system/password-field?style=flat-square)](README.md)
 [![module](https://img.shields.io/badge/module-ESM%2FCJS-blue?style=flat-square)](README.md)
 [![install size](https://packagephobia.com/badge?p=@substrate-system/password-field)](https://packagephobia.com/result?p=@substrate-system/password-field)
+[![GZip size](https://flat.badgen.net/bundlephobia/minzip/@substrate-system/password-field)](https://bundlephobia.com/package/@substrate-system/password-field)
 [![semantic versioning](https://img.shields.io/badge/semver-2.0.0-blue?logo=semver&style=flat-square)](https://semver.org/)
 [![license](https://img.shields.io/badge/license-Big_Time-blue?style=flat-square)](LICENSE)
 
@@ -29,6 +30,7 @@ See [./example](./example/index.ts) for an example of using the attribute to con
   * [Node.js / Server-Side Rendering](#nodejs--server-side-rendering)
   * [Events](#events)
   * [Attributes](#attributes)
+  * [Package Exports](#package-exports)
   * [ESM & CJS](#esm--cjs)
   * [ESM](#esm)
   * [Common JS](#common-js)
@@ -121,6 +123,9 @@ const html = render({
 - `isVisible` - Whether the password is visible (affects button icon)
 - Any other attributes will be passed through to the text-input component
 
+> [!NOTE]  
+> For server-side rendering, you'll need to include the CSS separately in your HTML template. The `render()` function only generates the HTML structure.
+
 **TypeScript types:**
 ```ts
 import type { Attrs } from '@substrate-system/web-component/attributes'
@@ -147,6 +152,15 @@ function renderLoginForm() {
         </form>
     `
 }
+```
+
+**Testing SSR Functions:**
+```bash
+# Test server-side rendering functions
+npm run test:node
+
+# Test both browser and Node.js functionality
+npm test
 ```
 
 ### Events
@@ -179,6 +193,27 @@ function renderLoginForm() {
 > [!NOTE]  
 > The `name` attribute is used for an `id` on the element also, so it should
 > be unique.
+
+### Package Exports
+
+This package provides multiple entry points:
+
+**Main component (client-side):**
+```js
+import { PasswordField, define } from '@substrate-system/password-field'
+```
+
+**Server-side rendering:**
+```js
+import { render } from '@substrate-system/password-field/html'
+```
+
+**CSS styles:**
+```js
+import '@substrate-system/password-field/css'
+// or minified
+import '@substrate-system/password-field/css/min'
+```
 
 ### ESM & CJS
 
