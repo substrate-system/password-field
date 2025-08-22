@@ -1,5 +1,5 @@
-import { render } from '../dist/html.js'
 import { test } from '@substrate-system/tapzero'
+import { render } from '../src/html.js'
 
 test('render function returns string', t => {
     const result = render()
