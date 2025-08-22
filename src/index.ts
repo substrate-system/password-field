@@ -17,8 +17,13 @@ declare global {
  *   - any attributes for `text-input`
  */
 export class PasswordField extends WebComponent.create('password-field') {
-    isVisible:boolean = this.hasAttribute('visible')
     static observedAttributes = ['visible']
+    isVisible:boolean
+
+    constructor () {
+        super()
+        this.isVisible = this.hasAttribute('visible')
+    }
 
     /**
      * Listen for change in visiblity.
