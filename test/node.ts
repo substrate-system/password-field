@@ -23,7 +23,7 @@ test('render with attributes', t => {
     t.ok(result.includes('display-name="New Password"'),
         'should include display-name attribute')
     t.ok(result.includes('required'), 'should include required attribute')
-    t.ok(result.includes('<eye-regular>'),
+    t.ok(result.includes('class="icon eye-regular"'),
         'should show eye-regular icon when not visible')
 })
 
@@ -36,7 +36,7 @@ test('render with visible password', t => {
 
     t.equal(typeof result, 'string', 'should return a string')
     t.ok(result.includes('isVisible'), 'should include isVisible attribute')
-    t.ok(result.includes('<eye-slash>'),
+    t.ok(result.includes('class="icon eye-slash"'),
         'should show eye-slash icon when visible')
 })
 
@@ -71,7 +71,7 @@ test('render with no attributes', t => {
     t.equal(typeof result, 'string', 'should return a string')
     t.ok(result.includes('<text-input></text-input>'),
         'should have empty text-input')
-    t.ok(result.includes('<eye-regular></eye-regular>'),
+    t.ok(result.includes('class="icon eye-regular"'),
         'should default to eye-regular icon')
 })
 
