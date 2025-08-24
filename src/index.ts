@@ -4,7 +4,7 @@ import '@substrate-system/icons/eye-regular'
 import '@substrate-system/text-input'
 import '@substrate-system/text-input/css'
 
-// for docuement.querySelector
+// for document.querySelector
 declare global {
     interface HTMLElementTagNameMap {
         'password-field': PasswordField;
