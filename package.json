@@ -57,7 +57,7 @@
     "@substrate-system/icons": "^0.1.29",
     "@substrate-system/text-input": "^0.1.1",
     "@substrate-system/util": "^0.1.2",
-    "@substrate-system/web-component": "^0.0.36"
+    "@substrate-system/web-component": "^0.0.38"
   },
   "devDependencies": {
     "@preact/signals": "^2.0.0",
