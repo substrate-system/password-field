@@ -23,6 +23,9 @@ the password.
 See [./example](./example/index.ts) for an example of using the attribute to
 control visiblity, and keeping two inputs in sync with each other.
 
+
+<details><summary><h2>Contents</h2></summary>
+
 <!-- toc -->
 
 - [Install](#install)
@@ -45,6 +48,9 @@ control visiblity, and keeping two inputs in sync with each other.
 - [Example](#example)
 
 <!-- tocstop -->
+
+</details>
+
 
 ## Install
 
@@ -230,31 +236,33 @@ import '@substrate-system/password-field/css/min'
 
 ### ESM & CJS
 
-This exposes ESM and common JS via [package.json `exports` field](https://nodejs.org/api/packages.html#exports).
+This exposes ESM and common JS via
+[package.json `exports` field](https://nodejs.org/api/packages.html#exports).
 
 ### ESM
 ```js
-import '@namespace/package/module'
+import '@substrate-system/package/module'
 ```
 
 ### Common JS
 ```js
-require('@namespace/package/module')
+require('@substrate-system/package/module')
 ```
 
 ## CSS
 
 ```js
-import '@namespace/package-name/css'
+import '@substrate-system/package-name/css'
 ```
 
 Or minified:
 ```js
-import '@namespace/package-name/css/min'
+import '@substrate-system/package-name/css/min'
 ```
 
 ## Example
-Use event bubbling to attach a single listener to the parent form. Use the imported component, `PasswordField`, to get the namespaced event name.
+Use event bubbling to attach a single listener to the parent form. Use the
+imported component, `PasswordField`, to get the namespaced event name.
 
 ```js
 import { PasswordField } from '@substrate-system/password-field'
