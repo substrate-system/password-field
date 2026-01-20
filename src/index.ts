@@ -1,8 +1,11 @@
 import { WebComponent, define as _define } from '@substrate-system/web-component'
-import '@substrate-system/icons/eye-slash'
-import '@substrate-system/icons/eye-regular'
+import { define as eyeDefine } from '@substrate-system/icons/eye-slash'
+import { define as regularDefine } from '@substrate-system/icons/eye-regular'
 import '@substrate-system/text-input'
 import '@substrate-system/text-input/css'
+
+eyeDefine()
+regularDefine()
 
 // for document.querySelector
 declare global {
