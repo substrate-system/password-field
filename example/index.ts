@@ -2,19 +2,12 @@ import { PasswordField } from '../src/index.js'
 import Debug from '@substrate-system/debug'
 import '../src/style.css'
 import './index.css'
-const debug = Debug()
+const debug = Debug(import.meta.env.DEV)
 
 customElements.define('password-field', PasswordField)
 
 document.body.innerHTML += `
     <form>
-        <input
-            type="text"
-            name="email"
-            autocomplete="username email"
-            style="display: none;"
-        />
-
         <password-field
             required
             name="password"
