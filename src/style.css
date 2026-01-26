@@ -1,6 +1,7 @@
 password-field {
     display: flex;
     margin: 1.4rem 0;
+    width: 100%;
 
     & button {
         border: none;
@@ -8,17 +9,8 @@ password-field {
         height: 42px;
     }
 
-    & input {
-        display: inline;
-    }
-
-    & .input-group {
-        margin-bottom: 0;
-    }
-
     & .pw-visibility {
         position: relative;
-        right: 45px;
         top: 25px;
     }
 
@@ -32,11 +24,9 @@ password-field {
         width: 100%;
 
         & .input {
-            margin: 0;
-        }
-
-        & input {
-            width: 100%;
+            & input {
+                padding-right: 3.6rem;
+            }
         }
     }
 }
