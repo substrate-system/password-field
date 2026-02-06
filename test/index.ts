@@ -18,6 +18,29 @@ test('password field', async t => {
         'should have the visibility change icon, set to hidden by default')
 })
 
+test('custom name attribute in a form', async t => {
+    t.plan(2)
+
+    document.body.innerHTML += `
+        <form id="test-form">
+            <password-field name="pw"></password-field>
+            <button type="submit">Submit</button>
+        </form>
+    `
+
+    const form = document.querySelector('#test-form') as HTMLFormElement
+
+    form.addEventListener('submit', (ev) => {
+        ev.preventDefault()
+        const input = form.querySelector('input[name="pw"]')
+        t.ok(input, 'should find the input by name="pw" in the form')
+        t.equal(input?.getAttribute('name'), 'pw',
+            'the internal input should have name="pw", not the default "password"')
+    })
+
+    form.requestSubmit()
+})
+
 test('events', async t => {
     t.plan(2)
     const el = await waitFor('password-field')
