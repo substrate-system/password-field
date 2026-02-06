@@ -71,6 +71,7 @@ export class PasswordField extends WebComponent.create('password-field') {
         const autocomplete = this.getAttribute('autocomplete') || 'new-password'
         this.isVisible = this.hasAttribute('visible')
 
+        // create object from attributes
         const attrs = Array.from(this.attributes).reduce((acc, attr) => {
             acc[attr.name] = attr.value || true
             return acc
@@ -81,6 +82,7 @@ export class PasswordField extends WebComponent.create('password-field') {
         attrs.autocomplete = autocomplete
         attrs.type = this.getType()
 
+        // object to string
         const attrString = Object.keys(attrs).map((k) => {
             const val = attrs[k]
             return k + (val === true ? '' : '=' + `"${val}"`)

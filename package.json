@@ -55,8 +55,8 @@
   },
   "dependencies": {
     "@substrate-system/icons": "^0.1.29",
-    "@substrate-system/text-input": "^0.1.1",
-    "@substrate-system/web-component": "^0.0.38"
+    "@substrate-system/text-input": "^0.1.4",
+    "@substrate-system/web-component": "^0.0.42"
   },
   "devDependencies": {
     "@preact/signals": "^2.0.0",
