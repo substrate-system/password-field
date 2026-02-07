@@ -78,6 +78,11 @@ document.querySelector('password-field')
         // opposite of isVisible
         console.log('visible?', ev.detail.isVisible)
     })
+
+// set visibility
+document.querySelector('password-field')
+    .isVisible = true
+// will set the attribute in the HTML
 ```
 
 #### HTML

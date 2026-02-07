@@ -4,8 +4,6 @@ import '../src/style.css'
 import './index.css'
 const debug = Debug(import.meta.env.DEV)
 
-customElements.define('password-field', PasswordField)
-
 document.body.innerHTML += `
     <form>
         <password-field

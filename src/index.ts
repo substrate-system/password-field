@@ -41,7 +41,18 @@ export function define () {
  */
 export class PasswordField extends WebComponent.create('password-field') {
     static observedAttributes = ['visible']
-    isVisible:boolean
+
+    set isVisible (value:boolean) {
+        if (value) {
+            this.setAttribute('visible', '')
+        } else {
+            this.removeAttribute('visible')
+        }
+    }
+
+    get isVisible ():boolean {
+        return this.hasAttribute('visible')
+    }
 
     static event (name:string) {
         return WebComponent.event(name)
@@ -71,12 +82,7 @@ export class PasswordField extends WebComponent.create('password-field') {
 
     // empty string = is visible
     // null = not visible
-    handleChange_visible (_, newValue) {
-        if (newValue === null) {
-            this.isVisible = false
-        } else {
-            this.isVisible = true
-        }
+    handleChange_visible (_, _newValue) {
         this.reRender()
     }
 
