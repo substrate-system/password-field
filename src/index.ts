@@ -101,6 +101,13 @@ export class PasswordField extends WebComponent.create('password-field') {
             this.isVisible = !this.isVisible
             ev.preventDefault()
             this.reRender()
+            const evName = this.isVisible ?
+                'visible' : 'hidden'
+            this.dispatchEvent(new CustomEvent(evName, {
+                bubbles: true,
+                cancelable: true,
+                detail: { isVisible: this.isVisible }
+            }))
             this.emit('change-visibility', {
                 detail: { isVisible: this.isVisible }
             })
@@ -166,5 +173,5 @@ export class PasswordField extends WebComponent.create('password-field') {
     }
 }
 
-// Export the render function for Node.js/SSR usage
-export { render } from './html.js'
+// define automatically
+define()

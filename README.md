@@ -201,6 +201,36 @@ npm test
     })
     ```
 
+* `visible`
+
+    Fired when the password becomes visible (the eyeball button is
+    clicked to show the password). This is a plain `CustomEvent`,
+    not namespaced. It bubbles and is cancelable.
+
+    The event `.detail` has a property `isVisible`, which is `true`.
+
+    ```js
+    el.addEventListener('visible', ev => {
+        const { isVisible } = ev.detail
+        // isVisible === true
+    })
+    ```
+
+* `hidden`
+
+    Fired when the password becomes hidden (the eyeball button is
+    clicked to hide the password). This is a plain `CustomEvent`,
+    not namespaced. It bubbles and is cancelable.
+
+    The event `.detail` has a property `isVisible`, which is `false`.
+
+    ```js
+    el.addEventListener('hidden', ev => {
+        const { isVisible } = ev.detail
+        // isVisible === false
+    })
+    ```
+
 ## Attributes
 
 * `visible`
