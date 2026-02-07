@@ -7,10 +7,26 @@ import '@substrate-system/text-input/css'
 eyeDefine()
 regularDefine()
 
+interface VisibilityDetail {
+    isVisible:boolean;
+}
+
+export interface VisibleEvent extends CustomEvent<VisibilityDetail> {
+    type:'visible';
+}
+export interface HiddenEvent extends CustomEvent<VisibilityDetail> {
+    type:'visible';
+}
+
 // for document.querySelector
 declare global {
     interface HTMLElementTagNameMap {
-        'password-field': PasswordField;
+        'password-field':PasswordField;
+    }
+
+    interface HTMLElementEventMap {
+        'visible':VisibleEvent;
+        'hidden':HiddenEvent;
     }
 }
 
