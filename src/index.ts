@@ -11,7 +11,7 @@ interface VisibilityDetail {
     isVisible:boolean;
 }
 
-export interface VisibleEvent extends CustomEvent<VisibilityDetail> {
+export interface VisibilityEvent extends CustomEvent<VisibilityDetail> {
     type:'visible';
 }
 export interface HiddenEvent extends CustomEvent<VisibilityDetail> {
@@ -25,7 +25,7 @@ declare global {
     }
 
     interface HTMLElementEventMap {
-        'visible':VisibleEvent;
+        'visible':VisibilityEvent;
         'hidden':HiddenEvent;
     }
 }

@@ -69,6 +69,26 @@ import { PasswordField } from '@substrate-system/password-field'
 import '@substrate-system/password-field/css'
 // or import minified css
 import '@substrate-system/password-field/css/min'
+
+document.querySelector('password-field')
+    .addEventListener('visible', ev => {
+        console.log('visible?', ev.detail.isVisible)
+    })
+    .addEventListener('hidden', ev => {
+        // opposite of isVisible
+        console.log('visible?', ev.detail.isVisible)
+    })
+```
+
+#### HTML
+
+```html
+<password-field
+    name="new-pw"
+    autocomplete="new-password"
+    display-name="New Password"
+    required
+></password-field>
 ```
 
 ### Server-Side
