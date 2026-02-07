@@ -18,6 +18,10 @@ export interface HiddenEvent extends CustomEvent<VisibilityDetail> {
     type:'visible';
 }
 
+export interface ChangeVisibilityEvent extends CustomEvent<VisibilityDetail> {
+    type:'password-field:change-visibility'
+}
+
 // for document.querySelector
 declare global {
     interface HTMLElementTagNameMap {
@@ -27,6 +31,7 @@ declare global {
     interface HTMLElementEventMap {
         'visible':VisibilityEvent;
         'hidden':HiddenEvent;
+        ['password-field:change-visibility']:VisibilityEvent
     }
 }
 
