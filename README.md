@@ -145,7 +145,7 @@ const html = render({
     name: 'password',
     'display-name': 'New Password',
     required: true,
-    isVisible: false
+    visible: false
 })
 ```
 
@@ -155,7 +155,7 @@ const html = render({
 - `display-name` - Display name for the field
 - `required` - Whether the field is required
 - `autocomplete` - Autocomplete attribute (defaults to 'new-password')
-- `isVisible` - Whether the password is visible (affects button icon)
+- `visible` - Whether the password is visible (affects button icon)
 - Any other attributes will be passed through to the text-input component
 
 > [!NOTE]  
