@@ -11,15 +11,11 @@ interface VisibilityDetail {
     isVisible:boolean;
 }
 
-export interface VisibilityEvent extends CustomEvent<VisibilityDetail> {
-    type:'visible';
+export interface ShowEvent extends CustomEvent<VisibilityDetail> {
+    type:'password-field:show';
 }
-export interface HiddenEvent extends CustomEvent<VisibilityDetail> {
-    type:'visible';
-}
-
-export interface ChangeVisibilityEvent extends CustomEvent<VisibilityDetail> {
-    type:'password-field:change-visibility'
+export interface HideEvent extends CustomEvent<VisibilityDetail> {
+    type:'password-field:hide';
 }
 
 // for document.querySelector
@@ -29,9 +25,8 @@ declare global {
     }
 
     interface HTMLElementEventMap {
-        'visible':VisibilityEvent;
-        'hidden':HiddenEvent;
-        ['password-field:change-visibility']:VisibilityEvent
+        'password-field:show':ShowEvent;
+        'password-field:hide':HideEvent;
     }
 }
 
@@ -92,22 +87,57 @@ export class PasswordField extends WebComponent.create('password-field') {
     }
 
     /**
+     * Attributes that should stay on the host element
+     * and not be forwarded to the inner text-input.
+     */
+    static hostOnlyAttrs = new Set(['class', 'style', 'visible'])
+
+    /**
+     * Attributes that should be forwarded to the inner
+     * input and removed from the host element.
+     */
+    static forwardedAttrs = new Set(['autocomplete', 'id'])
+
+    static shouldForward (name:string):boolean {
+        return (PasswordField.forwardedAttrs.has(name) ||
+            name.startsWith('aria-'))
+    }
+
+    /**
      * Add click event listeners
      */
     connectedCallback () {
-        const autocomplete = this.getAttribute('autocomplete') || 'new-password'
+        const autocomplete = (
+            this.getAttribute('autocomplete') || 'new-password'
+        )
         this.isVisible = this.hasAttribute('visible')
 
-        // create object from attributes
-        const attrs = Array.from(this.attributes).reduce((acc, attr) => {
-            acc[attr.name] = attr.value || true
-            return acc
-        }, {} as Partial<{ autocomplete, name, type, value }>)
+        // create object from attributes, excluding
+        // host-only attrs
+        const attrs = Array.from(this.attributes)
+            .reduce((acc, attr) => {
+                if (PasswordField.hostOnlyAttrs.has(attr.name)) {
+                    return acc
+                }
+                acc[attr.name] = attr.value || true
+                return acc
+            }, {} as Partial<{
+                autocomplete, name, type, value
+            }>)
 
-        attrs['display-name'] = this.getAttribute('display-name') || 'Password'
+        attrs['display-name'] = (
+            this.getAttribute('display-name') || 'Password'
+        )
         attrs.name = this.getAttribute('name') || 'password'
         attrs.autocomplete = autocomplete
         attrs.type = this.getType()
+
+        // Remove forwarded attrs from the host element
+        for (const attr of Array.from(this.attributes)) {
+            if (PasswordField.shouldForward(attr.name)) {
+                this.removeAttribute(attr.name)
+            }
+        }
 
         // object to string
         const attrString = Object.keys(attrs).map((k) => {
@@ -129,13 +159,8 @@ export class PasswordField extends WebComponent.create('password-field') {
             ev.preventDefault()
             this.reRender()
             const evName = this.isVisible ?
-                'visible' : 'hidden'
-            this.dispatchEvent(new CustomEvent(evName, {
-                bubbles: true,
-                cancelable: true,
-                detail: { isVisible: this.isVisible }
-            }))
-            this.emit('change-visibility', {
+                'show' : 'hide'
+            this.emit(evName, {
                 detail: { isVisible: this.isVisible }
             })
         })
@@ -163,18 +188,35 @@ export class PasswordField extends WebComponent.create('password-field') {
      * This method is called to (re)render the component's DOM.
      */
     render () {
-        const autocomplete = this.getAttribute('autocomplete') || 'new-password'
+        const autocomplete = (
+            this.getAttribute('autocomplete') || 'new-password'
+        )
         this.isVisible = this.hasAttribute('visible')
 
-        const attrs = Array.from(this.attributes).reduce((acc, attr) => {
-            acc[attr.name] = attr.value || true
-            return acc
-        }, {} as Partial<{ autocomplete, name, type, value }>)
+        const attrs = Array.from(this.attributes)
+            .reduce((acc, attr) => {
+                if (PasswordField.hostOnlyAttrs.has(attr.name)) {
+                    return acc
+                }
+                acc[attr.name] = attr.value || true
+                return acc
+            }, {} as Partial<{
+                autocomplete, name, type, value
+            }>)
 
-        attrs['display-name'] = this.getAttribute('display-name') || 'Password'
+        attrs['display-name'] = (
+            this.getAttribute('display-name') || 'Password'
+        )
         attrs.name = this.getAttribute('name') || 'password'
         attrs.autocomplete = autocomplete
         attrs.type = this.getType()
+
+        // Remove forwarded attrs from the host element
+        for (const attr of Array.from(this.attributes)) {
+            if (PasswordField.shouldForward(attr.name)) {
+                this.removeAttribute(attr.name)
+            }
+        }
 
         const attrString = Object.keys(attrs).map((k) => {
             const val = attrs[k]
@@ -193,7 +235,9 @@ export class PasswordField extends WebComponent.create('password-field') {
             this.isVisible = !this.isVisible
             ev.preventDefault()
             this.reRender()
-            this.emit('change-visibility', {
+            const evName = this.isVisible ?
+                'show' : 'hide'
+            this.emit(evName, {
                 detail: { isVisible: this.isVisible }
             })
         })
