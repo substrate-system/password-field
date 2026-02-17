@@ -71,10 +71,10 @@ import '@substrate-system/password-field/css'
 import '@substrate-system/password-field/css/min'
 
 document.querySelector('password-field')
-    .addEventListener('visible', ev => {
+    .addEventListener('password-field:show', ev => {
         console.log('visible?', ev.detail.isVisible)
     })
-    .addEventListener('hidden', ev => {
+    .addEventListener('password-field:hide', ev => {
         // opposite of isVisible
         console.log('visible?', ev.detail.isVisible)
     })
@@ -124,9 +124,10 @@ Listen for events in JS
 
 ```js
 import { PasswordField } from '@substrate-system/password-field'
-const eventName = PasswordField.event('change-visibility')
+const showEvent = PasswordField.event('show')
+// => 'password-field:show'
 
-form?.addEventListener(eventName, ev => {
+form?.addEventListener(showEvent, ev => {
     const { isVisible } = ev.detail
     console.log('is visible', isVisible)
 })
@@ -209,48 +210,32 @@ npm test
 
 ## Events
 
-* `password-field:change-visiblity`
-
-    ```js
-    import { PasswordField } from '../src/index.js'
-    PasswordField.event('change-visiblity')
-    // => 'password-field:change-visiblity'
-    ```
-
-    Fired when someone clicks the eyeball button in the field. The event
-    `.detail` has a property `isVisible`
-
-    ```js
-    form?.addEventListener(PasswordField.event('change-visibility'), ev => {
-        const { isVisible } = ev.detail
-    })
-    ```
-
-* `visible`
-
+* `password-field:show` or `PasswordField.event('show')`
     Fired when the password becomes visible (the eyeball button is
-    clicked to show the password). This is a plain `CustomEvent`,
-    not namespaced. It bubbles and is cancelable.
+    clicked to show the password). Bubbles and is cancelable.
 
     The event `.detail` has a property `isVisible`, which is `true`.
 
     ```js
-    el.addEventListener('visible', ev => {
+    import { PasswordField } from '@substrate-system/password-field'
+    PasswordField.event('show')
+    // => 'password-field:show'
+
+    el.addEventListener('password-field:show', ev => {
         const { isVisible } = ev.detail
         // isVisible === true
     })
     ```
 
-* `hidden`
+* `password-field:hide` or `PasswordField.event('hide')`
 
     Fired when the password becomes hidden (the eyeball button is
-    clicked to hide the password). This is a plain `CustomEvent`,
-    not namespaced. It bubbles and is cancelable.
+    clicked to hide the password). Bubbles and is cancelable.
 
     The event `.detail` has a property `isVisible`, which is `false`.
 
     ```js
-    el.addEventListener('hidden', ev => {
+    el.addEventListener('password-field:hide', ev => {
         const { isVisible } = ev.detail
         // isVisible === false
     })
@@ -258,15 +243,19 @@ npm test
 
 ## Attributes
 
-* `visible`
+* `visible` -- stays on the host element
 * `display-name`
 * `required`
 * `autocomplete`
 * `name`
+* `id`
+* `aria-*` -- any aria attribute
 
-> [!NOTE]  
-> The `name` attribute is used for an `id` on the element also, so it should
-> be unique.
+> [!NOTE]
+> The `autocomplete`, `id`, and `aria-*` attributes are forwarded to
+> the inner `<input>` element and removed from the outer
+> `<password-field>` host element. This ensures correct behavior for
+> form autocomplete, label association, and screen readers.
 
 ### Package Exports
 
@@ -321,11 +310,11 @@ imported component, `PasswordField`, to get the namespaced event name.
 
 ```js
 import { PasswordField } from '@substrate-system/password-field'
-import '@substrate-field/password-field/css'
+import '@substrate-system/password-field/css'
 
 const form = document.querySelector('form')
 
-form?.addEventListener(PasswordField.event('change-visibility'), ev => {
+form?.addEventListener(PasswordField.event('show'), ev => {
     // synchronize changes in visibility, so
     // both inputs are either visible or not visible
     const { isVisible } = ev.detail
